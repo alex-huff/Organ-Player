@@ -1,6 +1,6 @@
 package com.alexfh.organplayer.mixin;
 
-import com.alexfh.organplayer.ExampleMod;
+import com.alexfh.organplayer.OrganPlayer;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,6 +15,6 @@ class ExampleMixin
     private
     void init(CallbackInfo info)
     {
-        ExampleMod.LOGGER.info("This line is printed by an example mod mixin!");
+         // OrganPlayer.LOGGER.info("This line is printed by an example mod mixin!");
     }
 }

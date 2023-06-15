@@ -17,7 +17,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.alexfh.organplayer.ExampleMod"
+      "com.alexfh.organplayer.OrganPlayer"
     ]
   },
   "mixins": [
