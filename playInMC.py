@@ -13,7 +13,7 @@ def midiNoteToCreatePitch(note):
     return pitch
 
 def midiNoteToCreateOctave(note):
-    return int((note - 42) / 12) + 1
+    return int((note - 42) / 12)
 
 def clamp(val, minVal, maxVal):
     if val < minVal: return minVal
@@ -21,20 +21,19 @@ def clamp(val, minVal, maxVal):
     return val
 
 def midiNoteToCreateNote(note):
-    return (clamp(midiNoteToCreateOctave(note), 1, 3), midiNoteToCreatePitch(note))
+    return (clamp(midiNoteToCreateOctave(note), 0, 2), midiNoteToCreatePitch(note))
 
-def sendMessage(message, socket):
-    sendUpdate(message.type == 'note_on', message.note, socket)
-
-def sendUpdate(isPressed, midiNote, socket):
-    octave, note = midiNoteToCreateNote(midiNote)
+def sendUpdate(isPressed, octave, note, socket):
+    if (isPressed == noteState[octave][note]): return
     mcMessage = 0x8 if isPressed else 0x0
-    mcMessage = mcMessage + (octave - 1)
+    mcMessage = mcMessage + octave
     mcMessage = (mcMessage << 4) + note
     socket.send(bytes([mcMessage]))
+    noteState[octave][note] = isPressed
 
 pedalDown = False
 queuedReleases = set()
+noteState = [[False for n in range(13)] for o in range(3)]
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     sock.connect((mcHost, mcPort))
     if len(sys.argv) > 1:
@@ -49,11 +48,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
                 pedalDown = True
             elif (message.value == 0):
                 pedalDown = False
-                for note in queuedReleases:
-                    sendUpdate(False, note, sock)
+                for octave, note in queuedReleases:
+                    sendUpdate(False, octave, note, sock)
                 queuedReleases.clear()
             continue
-        if (pedalDown and message.type == 'note_off'):
-            queuedReleases.add(message.note)
+        octave, note = midiNoteToCreateNote(message.note)
+        pressed = message.type == 'note_on'
+        if (pedalDown and not pressed):
+            queuedReleases.add((octave, note))
             continue
-        sendMessage(message, sock)
+        sendUpdate(message.type == 'note_on', octave, note, sock)
