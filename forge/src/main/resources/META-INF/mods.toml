@@ -1,0 +1,33 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+issueTrackerURL = "https://github.com/alex-huff/organ-player/issues"
+license = "Zero-Clause BSD"
+
+[[mods]]
+modId = "organplayer"
+version = "${version}"
+displayName = "Organ Player"
+authors = ["phonis"]
+description = "Manual organ player for https://github.com/alex-huff/CraftOS-Create-MIDI"
+side = "CLIENT"
+
+[[dependencies.organplayer]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.organplayer]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.organplayer]]
+modId = "architectury"
+mandatory = true
+versionRange = "[8.2.89,)"
+ordering = "AFTER"
+side = "BOTH"

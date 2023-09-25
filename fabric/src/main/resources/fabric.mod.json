@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "organplayer",
+  "version": "${version}",
+  "name": "Organ Player",
+  "description": "Manual organ player for https://github.com/alex-huff/CraftOS-Create-MIDI",
+  "authors": [
+    "phonis"
+  ],
+  "contact": {
+    "sources": "https://github.com/alex-huff/organ-player"
+  },
+  "license": "Zero-Clause BSD",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "com.alexfh.fabric.OrganPlayerFabric"
+    ]
+  },
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.20.1",
+    "architectury": ">=8.2.89"
+  }
+}
