@@ -12,9 +12,9 @@ public
 class Organ
 {
 
-    private static final Vec3d     topLeftCorner       = new Vec3d(-92, 63, -11);
-    private static final Vec3d     downDirection       = new Vec3d(1, 0, 0);
-    private static final Vec3d     rightDirection      = new Vec3d(0, 0, -1);
+    private static final Vec3d     topLeftCorner       = new Vec3d(-995, 53, 146);
+    private static final Vec3d     downDirection       = new Vec3d(0, 0, -1);
+    private static final Vec3d     rightDirection      = new Vec3d(-1, 0, 0);
     private static final int       monitorWidth        = 5;
     private static final int       monitorHeight       = 5;
     private static final int       screenPixelWidth    = 100;
